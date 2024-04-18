@@ -21,6 +21,10 @@ public class Card : MonoBehaviour
         animator.SetBool("FlippedOpen", flipped);
 
     }
+    public int GetcardId()
+    {
+        return cardId;
+    }
 
 
 
