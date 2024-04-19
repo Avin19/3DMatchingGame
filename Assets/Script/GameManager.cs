@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     private bool picked;
     private int pair;
     private int pairCounter;
+    private int score = 0;
     List<Card> pickCard = new List<Card>();
 
     private void Awake()
@@ -22,19 +23,28 @@ public class GameManager : MonoBehaviour
         pickCard.Add(card);
         if (pickCard.Count == 2)
         {
-            picked = true;
-            StartCoroutine(CheckMatch());
+            if (pickCard[0].transform.position == pickCard[1].transform.position)
+            {
 
+            }
+            else
+            {
+                picked = true;
+                StartCoroutine(CheckMatch());
+            }
 
         }
+
+
     }
     private IEnumerator CheckMatch()
     {
-        yield return new WaitForSeconds(0.5f);
 
+        yield return new WaitForSeconds(0.2f);
         if (pickCard[0].GetcardId() == pickCard[1].GetcardId())
         {
-            // Match Scoring increase
+            score++;
+            UIHandler.Instance.UpdateScore(score);
             pickCard[0].gameObject.SetActive(false);
             pickCard[1].gameObject.SetActive(false);
             pairCounter++;
@@ -43,22 +53,26 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+
             pickCard[0].FlippedOpen(false);
+
             pickCard[1].FlippedOpen(false);
-            //yield return new WaitForSeconds(0.5f);
+
+
         }
-
-
-
-        // clearn up 
+        yield return new WaitForSeconds(0.1f);
         picked = false;
         pickCard.Clear();
+
+        // clearn up 
+
     }
     private void CheckForWin()
     {
         if (pair == pairCounter)
         {
-            //Won condition
+            UIHandler.Instance.Win();
+
         }
     }
     public void SetPair(int pairAmount)

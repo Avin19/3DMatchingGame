@@ -13,8 +13,9 @@ public class PlayerInput : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 Card currentCard = hit.transform.GetComponent<Card>();
-                currentCard.FlippedOpen(true);
                 GameManager.Instance.AddCardTopickList(currentCard);
+                currentCard.FlippedOpen(true);
+
             }
         }
     }

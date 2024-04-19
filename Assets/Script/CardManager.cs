@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CardManager : MonoBehaviour
 {
-    [SerializeField] private int pairAmount = 2;
+    [SerializeField] private int pairAmount;
     public Sprite[] sprites;
 
     private List<GameObject> cardDeck = new List<GameObject>();
@@ -19,9 +19,18 @@ public class CardManager : MonoBehaviour
     void Start()
     {
         GameManager.Instance.SetPair(pairAmount);
+
+    }
+    public void SetHeightWidth(int width = 2, int height = 2)
+    {
+        this.width = width;
+        this.height = height;
+        pairAmount = width * height / 2;
+    }
+    public void StartGame()
+    {
         CreatePlayField();
     }
-
     private void CreatePlayField()
     {
         for (int i = 0; i < pairAmount; i++)
