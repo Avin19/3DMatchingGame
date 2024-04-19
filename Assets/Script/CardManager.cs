@@ -62,7 +62,7 @@ public class CardManager : MonoBehaviour
                 num++;
             }
         }
-        holder.position = new Vector3(-width / 2, -height, -height / 2);
+        holder.position = new Vector3(-width / 2f, -height * 2, -height / 2f);
     }
 
 }

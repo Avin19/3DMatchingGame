@@ -1,8 +1,7 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using TMPro;
-using UnityEditor.SearchService;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,7 +10,7 @@ public class UIHandler : MonoBehaviour
 {
     [SerializeField] private CardManager cardManager;
     public static UIHandler Instance { get; private set; }
-    [SerializeField] private Button startBtn, settingbtn, restartbtn, pauseBtn;
+    [SerializeField] private Button startBtn, settingbtn, restartbtn, pauseBtn, quitBtn;
     [SerializeField] private GameObject mainMenu, settingPanel, scorePanel, gameWin;
     [SerializeField] private TextMeshProUGUI scoreText, winText;
     [SerializeField] private TMP_InputField widthInput, heightInput;
@@ -27,7 +26,13 @@ public class UIHandler : MonoBehaviour
         settingbtn.onClick.AddListener(OnSettingBtnClicked);
         restartbtn.onClick.AddListener(OnRestartBtnClicked);
         pauseBtn.onClick.AddListener(OnPauseBtnClicked);
+        quitBtn.onClick.AddListener(OnQuitButtonClicked);
 
+    }
+
+    private void OnQuitButtonClicked()
+    {
+        Application.Quit();
     }
 
     private void OnPauseBtnClicked()
