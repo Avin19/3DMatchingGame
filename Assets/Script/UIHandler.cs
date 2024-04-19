@@ -2,14 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIHandler : MonoBehaviour
 {
     [SerializeField] private CardManager cardManager;
     public static UIHandler Instance { get; private set; }
-    [SerializeField] private Button startBtn, settingbtn, restartbtn;
+    [SerializeField] private Button startBtn, settingbtn, restartbtn, pauseBtn;
     [SerializeField] private GameObject mainMenu, settingPanel, scorePanel, gameWin;
     [SerializeField] private TextMeshProUGUI scoreText, winText;
     [SerializeField] private TMP_InputField widthInput, heightInput;
@@ -24,13 +26,21 @@ public class UIHandler : MonoBehaviour
         startBtn.onClick.AddListener(OnStartClicked);
         settingbtn.onClick.AddListener(OnSettingBtnClicked);
         restartbtn.onClick.AddListener(OnRestartBtnClicked);
+        pauseBtn.onClick.AddListener(OnPauseBtnClicked);
 
+    }
+
+    private void OnPauseBtnClicked()
+    {
+        scorePanel.SetActive(false);
+        gameWin.SetActive(true);
+        winText.text = $"Your is : {score} ";
     }
 
     private void OnRestartBtnClicked()
     {
-        gameWin.SetActive(false);
-        mainMenu.SetActive(true);
+        scorePanel.SetActive(false);
+        SceneManager.LoadScene(0);
     }
 
     private void OnSettingBtnClicked()

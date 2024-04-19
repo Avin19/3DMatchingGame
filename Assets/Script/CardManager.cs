@@ -6,7 +6,7 @@ public class CardManager : MonoBehaviour
 {
     [SerializeField] private int pairAmount;
     public Sprite[] sprites;
-
+    public Transform holder;
     private List<GameObject> cardDeck = new List<GameObject>();
 
     private float offSet = 1.25f;
@@ -29,6 +29,7 @@ public class CardManager : MonoBehaviour
     }
     public void StartGame()
     {
+        cardDeck.Clear();
         CreatePlayField();
     }
     private void CreatePlayField()
@@ -38,7 +39,7 @@ public class CardManager : MonoBehaviour
             for (int j = 0; j < 2; j++)
             {
                 Vector3 pos = Vector3.zero;
-                GameObject cardGO = Instantiate(pfCard, pos, Quaternion.identity);
+                GameObject cardGO = Instantiate(pfCard, pos, Quaternion.identity, holder);
                 cardGO.GetComponent<Card>().Setcard(i, sprites[i]);
                 cardDeck.Add(cardGO);
             }
@@ -61,19 +62,7 @@ public class CardManager : MonoBehaviour
                 num++;
             }
         }
-
-    }
-    private void OnDrawGizmos()
-    {
-        if (pairAmount * 2 != width * height)
-        {
-            Debug.Log("Error : width *height shouldbe pairAmount * 2");
-        }
-        if (pairAmount > sprites.Length)
-        {
-            Debug.Log("To much pairs");
-
-        }
+        holder.position = new Vector3(-width / 2, -height, -height / 2);
     }
 
 }

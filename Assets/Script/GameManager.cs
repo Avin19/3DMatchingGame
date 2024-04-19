@@ -45,9 +45,15 @@ public class GameManager : MonoBehaviour
         {
             score++;
             UIHandler.Instance.UpdateScore(score);
+            AudioManager.Instance.Match();
+
+
             pickCard[0].gameObject.SetActive(false);
+            yield return new WaitForSeconds(0.05f);
             pickCard[1].gameObject.SetActive(false);
+
             pairCounter++;
+
             CheckForWin();
 
         }
@@ -57,6 +63,7 @@ public class GameManager : MonoBehaviour
             pickCard[0].FlippedOpen(false);
 
             pickCard[1].FlippedOpen(false);
+            AudioManager.Instance.MisMatch();
 
 
         }
@@ -72,6 +79,7 @@ public class GameManager : MonoBehaviour
         if (pair == pairCounter)
         {
             UIHandler.Instance.Win();
+            AudioManager.Instance.Win();
 
         }
     }

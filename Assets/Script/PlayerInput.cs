@@ -14,6 +14,7 @@ public class PlayerInput : MonoBehaviour
             {
                 Card currentCard = hit.transform.GetComponent<Card>();
                 GameManager.Instance.AddCardTopickList(currentCard);
+                AudioManager.Instance.ClickSound();
                 currentCard.FlippedOpen(true);
 
             }
